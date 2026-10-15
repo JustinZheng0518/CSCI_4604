@@ -20,9 +20,8 @@ OUTPUT_DIR = Path("outputs")
 OUTPUT_DIR.mkdir(exist_ok=True)
 
 
-# ------------------------------------------------------------
 # Create features
-# ------------------------------------------------------------
+
 
 df["sentence_length"] = (
     df["sentence"]
@@ -56,9 +55,9 @@ features = [
 ]
 
 
-# ------------------------------------------------------------
+
 # Scale features
-# ------------------------------------------------------------
+
 
 X = df[features]
 
@@ -67,10 +66,8 @@ scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X)
 
 
-# ------------------------------------------------------------
 # KMeans clustering
 # IMPORTANT: label (y) is NOT used here
-# ------------------------------------------------------------
 
 kmeans = KMeans(
     n_clusters=3,
@@ -92,9 +89,8 @@ print(
 )
 
 
-# ------------------------------------------------------------
 # Cluster summary
-# ------------------------------------------------------------
+
 
 summary = (
     df.groupby("cluster")[features]
@@ -107,9 +103,8 @@ print("\n===== Cluster Summary =====")
 print(summary)
 
 
-# ------------------------------------------------------------
 # PCA visualization
-# ------------------------------------------------------------
+
 
 pca = PCA(n_components=2)
 
@@ -143,9 +138,6 @@ plt.savefig(
 plt.close()
 
 
-# ------------------------------------------------------------
-# Examine y only AFTER clustering
-# ------------------------------------------------------------
 
 metaphor_rate = (
     df.groupby("cluster")["label"]

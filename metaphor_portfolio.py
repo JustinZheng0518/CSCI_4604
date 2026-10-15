@@ -1,20 +1,3 @@
-"""
-Portfolio Project 1: Metaphor Detection
-
-Step 2.1 — Check Class Balance
-
-Goal:
-    Examine whether the target classes are balanced before building
-    a machine learning classifier.
-
-Dataset:
-    VUA metaphor verb-classification dataset.
-
-Target:
-    label = 0 -> Literal
-    label = 1 -> Metaphorical
-"""
-
 from pathlib import Path
 
 import matplotlib
@@ -27,9 +10,9 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 
-# ============================================================
+ 
 # File paths
-# ============================================================
+ 
 
 DATA_PATH = Path("VUA_formatted_train.csv")
 
@@ -41,9 +24,9 @@ OUTPUT_DIR.mkdir(
 )
 
 
-# ============================================================
+ 
 # Load dataset
-# ============================================================
+ 
 
 df = pd.read_csv(
     DATA_PATH,
@@ -68,9 +51,9 @@ print(
 )
 
 
-# ============================================================
+ 
 # Step 2.1 — Check class balance
-# ============================================================
+ 
 
 class_counts = (
     df["label"]
@@ -108,9 +91,9 @@ print(
 )
 
 
-# ============================================================
+ 
 # Create class-distribution chart
-# ============================================================
+ 
 
 labels = [
     "Literal",
@@ -169,9 +152,9 @@ for bar, value in zip(
 plt.tight_layout()
 
 
-# ============================================================
+ 
 # Save chart
-# ============================================================
+ 
 
 OUTPUT_PATH = (
     OUTPUT_DIR
@@ -193,9 +176,9 @@ print(
     OUTPUT_PATH
 )
 
-# ============================================================
+ 
 # Step 2.2 — Create numerical features
-# ============================================================
+ 
 
 print("\n===== Step 2.2: Feature Engineering =====")
 
@@ -247,9 +230,9 @@ FEATURES = [
 ]
 
 
-# ============================================================
+ 
 # Show feature statistics
-# ============================================================
+ 
 
 print("\n===== Feature Summary =====")
 
@@ -258,9 +241,9 @@ print(
 )
 
 
-# ============================================================
+ 
 # Check potential outliers using the IQR rule
-# ============================================================
+ 
 
 print("\n===== Potential Outlier Check =====")
 
@@ -290,9 +273,9 @@ for feature in FEATURES:
     )
 
 
-# ============================================================
+ 
 # Feature histograms
-# ============================================================
+ 
 
 histogram_settings = {
     "sentence_length": {
@@ -369,9 +352,9 @@ print(
     "\nStep 2.2 complete."
 )
 
-# ============================================================
+ 
 # Step 2.3 — Check Missing Values
-# ============================================================
+ 
 
 print("\n===== Step 2.3: Missing Values =====")
 
@@ -389,9 +372,9 @@ print(
 )
 
 
-# ============================================================
+ 
 # Imputation
-# ============================================================
+ 
 
 if total_missing == 0:
 
@@ -463,9 +446,9 @@ print(
     "\nStep 2.3 complete."
 )
 
-# ============================================================
+ 
 # Step 2.4 — One-Hot Encode the Target Verb
-# ============================================================
+ 
 
 print("\n===== Step 2.4: One-Hot Encoding =====")
 
@@ -481,9 +464,9 @@ print(
 )
 
 
-# ============================================================
+ 
 # Keep the 50 most common verbs
-# ============================================================
+ 
 
 TOP_N = 50
 
@@ -510,9 +493,9 @@ print(
 )
 
 
-# ============================================================
+ 
 # Check how much of the dataset is covered by the top 50 verbs
-# ============================================================
+ 
 
 top_verb_rows = (
     df["verb"]
@@ -533,9 +516,9 @@ print(
 )
 
 
-# ============================================================
+ 
 # Apply one-hot encoding
-# ============================================================
+ 
 
 verb_encoded = pd.get_dummies(
     df["verb_category"],
@@ -559,9 +542,9 @@ print(
 )
 
 
-# ============================================================
+ 
 # Combine encoded verb features with numerical features
-# ============================================================
+ 
 
 numerical_features = df[
     [
@@ -599,9 +582,9 @@ print(
 
 print("\nStep 2.4 complete.")
 
-# ============================================================
+ 
 # Step 2.5 — Check Correlated Numerical Features
-# ============================================================
+ 
 
 print("\n===== Step 2.5: Correlation Check =====")
 
@@ -628,9 +611,9 @@ print(
 )
 
 
-# ============================================================
+ 
 # Check for highly correlated feature pairs
-# ============================================================
+ 
 
 HIGH_CORRELATION_THRESHOLD = 0.80
 
@@ -686,9 +669,9 @@ else:
         )
 
 
-# ============================================================
+ 
 # Create correlation heatmap
-# ============================================================
+ 
 
 fig, ax = plt.subplots(
     figsize=(8, 6)
@@ -756,9 +739,9 @@ fig.colorbar(
 plt.tight_layout()
 
 
-# ============================================================
+ 
 # Save correlation heatmap
-# ============================================================
+ 
 
 CORRELATION_OUTPUT_PATH = (
     OUTPUT_DIR

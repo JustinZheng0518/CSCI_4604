@@ -19,9 +19,9 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
 
-# ------------------------------------------------------------
+ 
 # Load train/test data
-# ------------------------------------------------------------
+ 
 
 train = pd.read_csv("train_split.csv")
 test = pd.read_csv("test_split.csv")
@@ -30,9 +30,9 @@ OUTPUT_DIR = Path("outputs")
 OUTPUT_DIR.mkdir(exist_ok=True)
 
 
-# ------------------------------------------------------------
+ 
 # Feature engineering
-# ------------------------------------------------------------
+ 
 
 def add_features(df, verb_counts):
 
@@ -86,9 +86,9 @@ test["verb_category"] = test["verb"].where(
 )
 
 
-# ------------------------------------------------------------
+ 
 # Select features and target
-# ------------------------------------------------------------
+ 
 
 features = [
     "sentence_length",
@@ -105,9 +105,9 @@ y_train = train["label"]
 y_test = test["label"]
 
 
-# ------------------------------------------------------------
+
 # Preprocessing
-# ------------------------------------------------------------
+
 
 numeric_features = [
     "sentence_length",
@@ -139,9 +139,9 @@ preprocessor = ColumnTransformer(
 )
 
 
-# ------------------------------------------------------------
+
 # Step 5-6 — Classification model and training
-# ------------------------------------------------------------
+
 
 model = Pipeline(
     [
@@ -167,18 +167,15 @@ model.fit(
 )
 
 
-# ------------------------------------------------------------
 # Step 7 — Test model
-# ------------------------------------------------------------
+
 
 predictions = model.predict(
     X_test
 )
 
-
-# ------------------------------------------------------------
 # Step 8 — Model measurements
-# ------------------------------------------------------------
+
 
 accuracy = accuracy_score(
     y_test,
@@ -209,9 +206,8 @@ print(f"Recall:    {recall:.3f}")
 print(f"F1 Score:  {f1:.3f}")
 
 
-# ------------------------------------------------------------
 # Confusion Matrix
-# ------------------------------------------------------------
+
 
 ConfusionMatrixDisplay.from_predictions(
     y_test,
